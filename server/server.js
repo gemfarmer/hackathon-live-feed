@@ -118,13 +118,15 @@ function getCommits(owner, repo) {
 var gitData = config.github;
 
 var loop = function loop() {
+  console.log('<><<><><><><><><><><><><><><><><><><><')
   gitData.forEach(function(data) {
     getCommits(data.owner, data.repo);
   });
 }
-gitData.forEach(function(data) {
-  getCommits(data.owner, data.repo);
-});
+setTimeout(function () {
+  loop();
+},5000);
+console.log('<><<><>config<><><><><><><><><')
 setInterval(loop, 25000);
 
 

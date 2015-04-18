@@ -36,17 +36,23 @@ stream.controller('TweetCtrl', ['$scope', 'socket', function($scope, socket){
 ]);
 
 stream.controller('CommitCtrl', ['$scope', 'socket', 'ipCookie', function($scope, socket, ipCookie){
+  
     $scope.status = "No commits yet...";
     $scope.commits = ipCookie('commits') || [];
     var i = 0;
     // new commit arrives from server
     socket.on('newCommit', function (commit) {
-      console.log(commit)
-      console.log("hi!");
-      $scope.status = "";
-      $scope.commits = commit;
-      ipCookie('commits',commit)
-      console.log('commits',$scope.commits)
+      if (commit.message){
+        return;
+      } else{
+        console.log(commit)
+        console.log("hi!");
+        $scope.status = "";
+        $scope.commits = commit;
+        ipCookie('commits',commit)
+        console.log('commits',$scope.commits)
+      }
+      
     });
   }
 ]);
